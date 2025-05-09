@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "server": "ng serve",
+    "build:github": "ng build --base-href=/NttData.github.io/",
     "serve:ssr:ntt-data-city-app": "node dist/ntt-data-city-app/server/server.mjs"
   },
   "private": true,
