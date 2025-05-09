@@ -1,0 +1,127 @@
+.user-detail-container {
+  padding: 20px;
+}
+
+.back-button {
+  margin-bottom: 20px;
+}
+
+.user-card {
+  margin-bottom: 30px;
+}
+
+.user-info {
+  margin-top: 20px;
+}
+
+.info-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.value {
+  margin-left: 10px;
+}
+
+.active-status {
+  color: green;
+  font-weight: 500;
+}
+
+.inactive-status {
+  color: red;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.posts-section {
+  margin-top: 30px;
+}
+
+.no-posts {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.posts-list {
+  margin-top: 20px;
+}
+
+.post-panel {
+  margin-bottom: 10px;
+}
+
+.post-content {
+  margin-bottom: 20px;
+  white-space: pre-line;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.no-comments {
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.comment-card {
+  margin-bottom: 15px;
+  background-color: #f5f5f5;
+}
+
+.comment-form-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.add-comment-button {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .value {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}

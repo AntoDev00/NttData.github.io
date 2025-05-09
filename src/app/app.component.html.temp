@@ -1,0 +1,24 @@
+<div class="app-container" *ngIf="isAuthenticated$ | async; else notAuthenticated">
+  <mat-toolbar color="primary" class="app-header">
+    <div class="logo-container">
+      <img src="assets/ntt-data-logo.svg" alt="NTT DATA" class="logo" height="40">
+      <span class="app-title">City App</span>
+    </div>
+    <span class="spacer"></span>
+    <div class="nav-links">
+      <a mat-button routerLink="/users" routerLinkActive="active">Utenti</a>
+      <a mat-button routerLink="/posts" routerLinkActive="active">Post</a>
+      <button mat-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon> Logout
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<ng-template #notAuthenticated>
+  <router-outlet></router-outlet>
+</ng-template>
