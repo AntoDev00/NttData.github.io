@@ -1,0 +1,32 @@
+<div class="login-container">
+  <div class="login-card-wrapper">
+    <mat-card class="login-card">
+      <mat-card-header>
+        <mat-card-title>Login - NTT DATA City App</mat-card-title>
+        <mat-card-subtitle>Inserisci il token di autenticazione</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://mc-8afc6902-e56c-432c-8c3f-3991-cdn-endpoint.azureedge.net/-/media/project/emea/shared/global-logo/globallogo_nttdata_white_resized.png?extension=webp&hash=82AED889DCD1D6C0BA76C56A5F81B4C6" alt="NTT Data Logo" class="logo">
+      <mat-card-content>
+        <p class="info-text">
+          Per ottenere un token valido, visita <a href="https://gorest.co.in/consumer/login" target="_blank">GoRest Login</a>
+        </p>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Access Token</mat-label>
+            <input matInput formControlName="token" [type]="hideToken ? 'password' : 'text'" required>
+            <button type="button" mat-icon-button matSuffix (click)="hideToken = !hideToken">
+              <mat-icon>{{ hideToken ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('token')?.hasError('required')">
+              Il token è richiesto
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="login-button">
+            Accedi
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

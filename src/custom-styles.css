@@ -1,0 +1,18 @@
+/* Stili personalizzati per forzare i colori nella navbar */
+.mat-toolbar.dark-toolbar {
+  background-color: #333333 !important;
+}
+
+.mat-toolbar.dark-toolbar .mat-mdc-button,
+.mat-toolbar.dark-toolbar .mat-icon,
+.mat-toolbar.dark-toolbar a,
+.mat-toolbar.dark-toolbar button,
+.mat-toolbar.dark-toolbar span {
+  color: white !important;
+}
+
+/* Forza il bianco anche per gli stati hover */
+.mat-toolbar.dark-toolbar .mat-mdc-button:hover {
+  color: white !important;
+  opacity: 0.9;
+}

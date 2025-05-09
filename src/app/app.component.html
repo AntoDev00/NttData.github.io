@@ -1,0 +1,26 @@
+<div class="app-container" *ngIf="isAuthenticated$ | async; else notAuthenticated">
+  <mat-toolbar style="background-color: #333333;" class="app-header dark-toolbar">
+    <div class="logo-container">
+      <a routerLink="/" class="logo-link">
+        <img class="navbar-brand" src="https://mc-8afc6902-e56c-432c-8c3f-3991-cdn-endpoint.azureedge.net/-/media/project/emea/shared/global-logo/globallogo_nttdata_white_resized.png?extension=webp&hash=82AED889DCD1D6C0BA76C56A5F81B4C6" alt="NTT Data Logo" height="40">
+        <span class="app-title">City App</span>
+      </a>
+    </div>
+    <span class="spacer"></span>
+    <div class="nav-links">
+      <a mat-button routerLink="/users" routerLinkActive="active"><span style="color: white !important; font-weight: bold;">Utenti</span></a>
+      <a mat-button routerLink="/posts" routerLinkActive="active"><span style="color: white !important; font-weight: bold;">Post</span></a>
+      <button mat-button (click)="logout()">
+        <mat-icon style="color: white !important;">exit_to_app</mat-icon> <span style="color: white !important; font-weight: bold;">Logout</span>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<ng-template #notAuthenticated>
+  <router-outlet></router-outlet>
+</ng-template>

@@ -1,0 +1,122 @@
+<div class="user-detail-container">
+  <div class="back-button">
+    <button mat-button color="primary" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon> Torna alla lista
+    </button>
+  </div>
+
+  <!-- Scheda dettaglio utente -->
+  <mat-card *ngIf="user; else loading" class="user-card">
+    <mat-card-header>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>ID: {{ user.id }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="user-info">
+        <div class="info-item">
+          <span class="label">Email:</span>
+          <span class="value">{{ user.email }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Genere:</span>
+          <span class="value">{{ user.gender }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Stato:</span>
+          <span class="value" [ngClass]="{'active-status': user.status === 'active', 'inactive-status': user.status === 'inactive'}">{{ user.status }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  </ng-template>
+
+  <!-- Sezione dei post dell'utente -->
+  <div class="posts-section" *ngIf="user">
+    <h2>Post dell'utente</h2>
+
+    <div *ngIf="loadingPosts" class="loading-spinner">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <div *ngIf="!loadingPosts && posts.length === 0" class="no-posts">
+      Nessun post trovato per questo utente.
+    </div>
+
+    <div *ngIf="!loadingPosts && posts.length > 0" class="posts-list">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let post of posts" class="post-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ post.title }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          
+          <div class="post-content">
+            <p>{{ post.body }}</p>
+          </div>
+          
+          <!-- Commenti -->
+          <div class="comments-section">
+            <h3>Commenti ({{ getCommentsForPost(post.id).length }})</h3>
+            
+            <div *ngIf="getCommentsForPost(post.id).length === 0" class="no-comments">
+              Nessun commento trovato per questo post.
+            </div>
+            
+            <mat-card *ngFor="let comment of getCommentsForPost(post.id)" class="comment-card">
+              <mat-card-header>
+                <mat-card-title>{{ comment.name }}</mat-card-title>
+                <mat-card-subtitle>{{ comment.email }}</mat-card-subtitle>
+              </mat-card-header>
+              
+              <mat-card-content>
+                <p>{{ comment.body }}</p>
+              </mat-card-content>
+            </mat-card>
+            
+            <!-- Form per aggiungere un commento -->
+            <div *ngIf="selectedPostId === post.id" class="comment-form-container">
+              <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="comment-form">
+                <h4>Aggiungi un commento</h4>
+                
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Nome</mat-label>
+                  <input matInput formControlName="name" required>
+                  <mat-error *ngIf="commentForm.get('name')?.hasError('required')">Il nome è obbligatorio</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" required type="email">
+                  <mat-error *ngIf="commentForm.get('email')?.hasError('required')">L'email è obbligatoria</mat-error>
+                  <mat-error *ngIf="commentForm.get('email')?.hasError('email')">Inserisci un'email valida</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Commento</mat-label>
+                  <textarea matInput formControlName="body" required rows="4"></textarea>
+                  <mat-error *ngIf="commentForm.get('body')?.hasError('required')">Il commento è obbligatorio</mat-error>
+                </mat-form-field>
+                
+                <div class="form-actions">
+                  <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Invia commento</button>
+                  <button mat-button type="button" (click)="cancelComment()">Annulla</button>
+                </div>
+              </form>
+            </div>
+            
+            <div *ngIf="selectedPostId !== post.id" class="add-comment-button">
+              <button mat-raised-button color="primary" (click)="selectPostForComment(post.id)">
+                <mat-icon>add_comment</mat-icon> Aggiungi commento
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>
