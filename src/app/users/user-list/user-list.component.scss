@@ -40,9 +40,19 @@ table {
   width: 100%;
 }
 
+// Stile solo per la colonna delle azioni
 .mat-column-actions {
   width: 120px;
   text-align: center;
+}
+
+// Contenitore delle azioni con le icone allineate orizzontalmente
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
 .active-status {

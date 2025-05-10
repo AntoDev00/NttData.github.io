@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from '../../core/models/user.model';
 import { UserService } from '../../core/services/user.service';
+import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -109,7 +110,29 @@ export class UserListComponent implements OnInit {
   }
 
   createUser(): void {
-    // TODO: Implementare la creazione dell'utente con un dialog
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '500px',
+      data: { title: 'Crea Nuovo Utente' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsers(); // Ricarica la lista degli utenti dopo la creazione
+      }
+    });
+  }
+
+  editUser(user: User): void {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '500px',
+      data: { title: 'Modifica Utente', user: {...user} }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsers(); // Ricarica la lista degli utenti dopo la modifica
+      }
+    });
   }
 
   deleteUser(userId: number): void {
